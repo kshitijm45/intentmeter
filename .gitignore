@@ -1,0 +1,40 @@
+# ── Model (too large for git) ─────────────────────────────────
+/backend/fused_model/
+
+# ── Python virtualenv ─────────────────────────────────────────
+/backend/venv/
+/backend/.venv/
+
+# ── Database files ────────────────────────────────────────────
+/backend/*.db
+/backend/*.db-shm
+/backend/*.db-wal
+
+# ── Python cache ──────────────────────────────────────────────
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+
+# ── Environment variables ─────────────────────────────────────
+.env
+.env.local
+.env.*.local
+
+# ── macOS ─────────────────────────────────────────────────────
+.DS_Store
+**/.DS_Store
+
+# ── Next.js ───────────────────────────────────────────────────
+/frontend/.next/
+/frontend/node_modules/
+/frontend/out/
+
+# ── Claude Code ───────────────────────────────────────────────
+CLAUDE.md
+.claude/
+
+# ── Editor ────────────────────────────────────────────────────
+.vscode/
+.idea/
+*.swp

@@ -1,0 +1,64 @@
+@import "tailwindcss";
+
+/* Enable .dark class-based dark mode for Tailwind v4 */
+@variant dark (&:where(.dark, .dark *));
+
+/* ── Design tokens ─────────────────────────────────────── */
+:root {
+  /* Light mode */
+  --bg:             #f7f6f3;
+  --bg-card:        #eeecea;
+  --bg-input:       #e5e3e0;
+  --border:         #d2d0cc;
+  --txt:            #18181c;
+  --txt-2:          #48485a;
+  --txt-3:          #6c6c7e;
+  --accent:         #ea580c;
+  --accent-fg:      #ffffff;
+  --accent-bg:      rgba(234,88,12,0.08);
+  --accent-border:  rgba(234,88,12,0.25);
+  --p2:             #3b82f6;
+  --p2-bg:          rgba(59,130,246,0.08);
+  --p2-border:      rgba(59,130,246,0.25);
+  --nav-bg:         rgba(247,246,243,0.94);
+}
+
+.dark {
+  /* Dark mode */
+  --bg:             #0d0d11;
+  --bg-card:        #131318;
+  --bg-input:       #1b1b23;
+  --border:         #28283a;
+  --txt:            #f0f0f6;
+  --txt-2:          #8e8ea8;
+  --txt-3:          #545468;
+  --accent:         #ea580c;
+  --accent-fg:      #ffffff;
+  --accent-bg:      rgba(234,88,12,0.12);
+  --accent-border:  rgba(234,88,12,0.28);
+  --p2:             #3b82f6;
+  --p2-bg:          rgba(59,130,246,0.12);
+  --p2-border:      rgba(59,130,246,0.28);
+  --nav-bg:         rgba(13,13,17,0.92);
+}
+
+@theme inline {
+  --font-sans: var(--font-geist-sans);
+  --font-mono: var(--font-geist-mono);
+}
+
+body {
+  background: var(--bg);
+  color: var(--txt);
+  font-family: var(--font-geist-sans), Arial, Helvetica, sans-serif;
+  transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+::-webkit-scrollbar { width: 6px; height: 6px; }
+::-webkit-scrollbar-track  { background: var(--bg-card); }
+::-webkit-scrollbar-thumb  { background: var(--border); border-radius: 3px; }
+::-webkit-scrollbar-thumb:hover { background: var(--accent); }
