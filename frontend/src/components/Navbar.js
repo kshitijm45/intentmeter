@@ -6,7 +6,7 @@ import { useTheme } from "@/components/ThemeProvider";
 
 const navLinks = [
   { label: "Home", href: "/" },
-  { label: "Player Profiles", href: "/players/virat-kohli" },
+  { label: "Player Profiles", href: "/players" },
   { label: "Matchups", href: "/matchup" },
   { label: "Advanced Stats", href: "/explorer" },
   { label: "Assistant", href: "/assistant" },

@@ -26,19 +26,21 @@ PHASE_LABELS = {
 
 # bowling_style values from players table mapped to query-friendly keys
 BOWLER_TYPE_FILTERS = {
-    "right-pace":    "bp.bowling_style LIKE 'Right-arm pace%'",
-    "left-pace":     "bp.bowling_style LIKE 'Left-arm pace%'",
-    "off-spin":      "bp.bowling_style LIKE 'off-spin%'",
-    "leg-spin":      "(bp.bowling_style LIKE '%wrist-spin%')",
-    "right-orthodox": "bp.bowling_style LIKE 'Right-arm off-spin%'",
-    "left-orthodox":  "bp.bowling_style LIKE 'Left-arm off-spin%'",
-    "right-wrist":    "bp.bowling_style LIKE 'Right-arm wrist-spin%'",
-    "left-wrist":     "bp.bowling_style LIKE 'Left-arm wrist-spin%'",
-    "pace":          "(bp.bowling_style LIKE '%pace%')",
-    "spin":          "(bp.bowling_style LIKE '%spin%')",
+    "right-pace":     "bp.bowling_style LIKE '%Right-arm pace%'",
+    "left-pace":      "bp.bowling_style LIKE '%Left-arm pace%'",
+    "off-spin":       "(bp.bowling_style LIKE '%off-spin%' OR bp.bowling_style LIKE '%off-break%')",
+    "leg-spin":       "(bp.bowling_style LIKE '%wrist-spin%')",
+    "right-orthodox": "bp.bowling_style LIKE '%Right-arm off-spin%'",
+    "left-orthodox":  "bp.bowling_style LIKE '%Left-arm off-spin%'",
+    "right-wrist":    "bp.bowling_style LIKE '%Right-arm wrist-spin%'",
+    "left-wrist":     "bp.bowling_style LIKE '%Left-arm wrist-spin%'",
+    "pace":           "(bp.bowling_style LIKE '%pace%')",
+    "spin":           "(bp.bowling_style LIKE '%spin%')",
 }
 
 BOWLER_TYPE_LABELS = {
+    "pace":          "All Pace",
+    "spin":          "All Spin",
     "right-pace":    "Right-arm Pace",
     "left-pace":     "Left-arm Pace",
     "off-spin":      "Off-spin",

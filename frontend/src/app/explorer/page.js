@@ -341,7 +341,8 @@ export default function ExplorerPage() {
         if (inningsFilter !== "any") p.set("innings", inningsFilter);
         url = `${API_BASE}/stats/team?${p}`;
       } else {
-        const p = new URLSearchParams({ player, mode: subject });
+        const mode = subject === "bowler" ? "bowling" : "batting";
+        const p = new URLSearchParams({ player, mode });
         if (phase !== "all") p.set("phase", phase);
         events.forEach((e) => p.append("events", e));
         if (subject === "batter" && bowlerType)  p.set("bowler_type", bowlerType);

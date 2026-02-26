@@ -7,13 +7,13 @@ router = APIRouter()
 # mlx_lm only works on Apple Silicon. On other platforms the import will fail
 # and the endpoint returns a clear error rather than crashing the server.
 try:
-    from testmodel import run_query as _run_query  # noqa: E402
+    from gemini_model import run_query as _run_query  # noqa: E402
     MODEL_AVAILABLE = True
-    print("✅ Cricket-SQL model loaded and ready.")
+    print("✅ Gemini Cricket-SQL assistant ready.")
 except Exception as _load_err:
     MODEL_AVAILABLE = False
     _load_err_msg = str(_load_err)
-    print(f"⚠️  Could not load model: {_load_err_msg}")
+    print(f"⚠️  Could not load gemini_model: {_load_err_msg}")
 
 
 class AskRequest(BaseModel):

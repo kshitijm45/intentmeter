@@ -26,7 +26,7 @@ export default function SeasonBarChart({ data, dataKey, label }) {
       <BarChart data={data} margin={{ top: 5, right: 10, left: -10, bottom: 5 }}>
         <CartesianGrid strokeDasharray="3 3" stroke="var(--border)" vertical={false} />
         <XAxis
-          dataKey="season"
+          dataKey="year"
           tick={{ fill: "var(--txt-3)", fontSize: 12 }}
           axisLine={false}
           tickLine={false}
