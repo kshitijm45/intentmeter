@@ -48,15 +48,7 @@ export default function Navbar() {
         <div className="flex items-center justify-between h-16">
           {/* Logo */}
           <Link href="/" className="flex items-center gap-2 group">
-            <div className="w-8 h-8 rounded-lg bg-orange-600 flex items-center justify-center">
-              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--accent-fg)" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
-                <circle cx="12" cy="12" r="10" />
-                <path d="M8 12l3 3 5-5" />
-              </svg>
-            </div>
-            <span className="text-[var(--txt)] font-bold text-xl tracking-tight group-hover:text-orange-600 transition-colors duration-200">
-              Intentmeter
-            </span>
+            <img src="/logo.png" alt="Intentmeter" className="h-9 w-auto" />
           </Link>
 
           {/* Desktop links */}

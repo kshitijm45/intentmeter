@@ -17,6 +17,7 @@ const geistMono = Geist_Mono({
 export const metadata = {
   title: "Intentmeter – Cricket Analytics",
   description: "Professional cricket analytics dashboard",
+  icons: { icon: "/logo.png" },
 };
 
 export default function RootLayout({ children }) {

@@ -1,8 +1,10 @@
 "use client";
 import { useState, useEffect } from "react";
 import { use } from "react";
+import { useRouter } from "next/navigation";
 import StatCard from "@/components/StatCard";
 import SeasonBarChart from "@/components/SeasonBarChart";
+import PlayerCombobox from "@/components/PlayerCombobox";
 
 const API = "http://localhost:8000/api";
 const ACCENT = "#ea580c";
@@ -198,12 +200,29 @@ const EVENTS_OPTS = [
 export default function PlayerProfilePage({ params }) {
   const { name: rawName } = use(params);
   const name = decodeURIComponent(rawName);
+  const router = useRouter();
 
-  const [eventsIdx, setEventsIdx] = useState(0);
-  const [tab,       setTab]       = useState("batting");
-  const [data,      setData]      = useState(null);
-  const [loading,   setLoading]   = useState(true);
-  const [error,     setError]     = useState(null);
+  const [eventsIdx,      setEventsIdx]      = useState(0);
+  const [tab,            setTab]            = useState("batting");
+  const [data,           setData]           = useState(null);
+  const [loading,        setLoading]        = useState(true);
+  const [error,          setError]          = useState(null);
+  const [players,        setPlayers]        = useState([]);
+  const [loadingPlayers, setLoadingPlayers] = useState(true);
+
+  // Fetch player list for the switcher
+  useEffect(() => {
+    fetch(`${API}/players`)
+      .then(r => r.json())
+      .then(d => { setPlayers(d); setLoadingPlayers(false); })
+      .catch(() => setLoadingPlayers(false));
+  }, []);
+
+  const handlePlayerSwitch = (uniqueName) => {
+    if (uniqueName && uniqueName !== name) {
+      router.push(`/players/${encodeURIComponent(uniqueName)}`);
+    }
+  };
 
   useEffect(() => {
     const evts = EVENTS_OPTS[eventsIdx].value;
@@ -239,12 +258,12 @@ export default function PlayerProfilePage({ params }) {
 
   const bowlingCards = [
     { label: "Matches",          value: fmtInt(bowling.overall?.matches) },
-    { label: "Innings",          value: fmtInt(bowling.overall?.innings_bowled) },
+    { label: "Innings",          value: fmtInt(bowling.overall?.innings) },
     { label: "Wickets",          value: fmtInt(bowling.overall?.wickets),          highlight: true },
     { label: "Economy",          value: fmt(bowling.overall?.economy) },
     { label: "Average",          value: fmt(bowling.overall?.avg) },
     { label: "Strike Rate",      value: fmt(bowling.overall?.bowling_sr) },
-    { label: "Legal Balls",      value: fmtOvers(bowling.overall?.legal_balls) },
+    { label: "Wkts / Inn",       value: fmt(bowling.overall?.wkts_per_innings) },
     { label: "Dot Ball %",       value: fmt(bowling.overall?.dot_ball_pct) },
     { label: "Boundary Given %", value: fmt(bowling.overall?.boundary_given_pct) },
   ];
@@ -271,6 +290,17 @@ export default function PlayerProfilePage({ params }) {
   return (
     <div className="min-h-screen px-4 sm:px-6 lg:px-8 py-10" style={{ background: "var(--bg)" }}>
       <div className="max-w-5xl mx-auto">
+
+        {/* ── Player switcher ─────────────────────────────────────────────── */}
+        <div className="mb-4">
+          <PlayerCombobox
+            players={players}
+            value={name}
+            onChange={handlePlayerSwitch}
+            placeholder="Switch player…"
+            loading={loadingPlayers}
+          />
+        </div>
 
         {/* ── Player header ────────────────────────────────────────────────── */}
         <div
