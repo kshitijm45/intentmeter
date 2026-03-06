@@ -18,6 +18,10 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
+@app.get("/")
+def health():
+    return {"status": "ok"}
+
 app.include_router(matchup.router, prefix="/api")
 app.include_router(players.router, prefix="/api")
 app.include_router(compare.router, prefix="/api")

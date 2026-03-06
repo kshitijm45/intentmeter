@@ -1,7 +1,8 @@
 import os
 import sqlite3
 import re
-import google.generativeai as genai
+from google import genai
+from google.genai import types
 from dotenv import load_dotenv
 
 load_dotenv()  # loads backend/.env when running from backend/
@@ -11,9 +12,10 @@ load_dotenv()  # loads backend/.env when running from backend/
 # ============================================================
 _API_KEY = os.environ.get("GEMINI_API_KEY", "")
 if _API_KEY:
-    genai.configure(api_key=_API_KEY)
+    _client = genai.Client(api_key=_API_KEY)
     print("✅ Gemini API key configured.")
 else:
+    _client = None
     print("⚠️  GEMINI_API_KEY not set — set it in your .env or environment.")
 
 # ============================================================
@@ -582,7 +584,7 @@ def run_query(question):
     Returns:
         (sql, columns, rows, error)
     """
-    if not _API_KEY:
+    if not _client:
         return None, [], [], "GEMINI_API_KEY is not set. Add it to your environment or .env file."
 
     # Resolve player names BEFORE building the prompt
@@ -590,11 +592,18 @@ def run_query(question):
     print(f"📝 Question (resolved): {question}")
 
     try:
-        gemini = genai.GenerativeModel(
-            model_name="gemini-2.5-flash",
-            system_instruction=SYSTEM_PROMPT,
+        history = [
+            types.Content(
+                role=entry["role"],
+                parts=[types.Part(text=p) if isinstance(p, str) else types.Part(text=p["text"]) for p in entry["parts"]],
+            )
+            for entry in FEW_SHOT_HISTORY
+        ]
+        chat = _client.chats.create(
+            model="gemini-2.5-flash",
+            config=types.GenerateContentConfig(system_instruction=SYSTEM_PROMPT),
+            history=history,
         )
-        chat = gemini.start_chat(history=FEW_SHOT_HISTORY)
 
         print("🤔 Generating SQL...")
         response = chat.send_message(f"Question: {question}")
