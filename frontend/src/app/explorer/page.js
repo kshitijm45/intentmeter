@@ -2,7 +2,7 @@
 import { useState, useEffect } from "react";
 import PlayerCombobox from "@/components/PlayerCombobox";
 
-const API_BASE = "http://localhost:8000/api";
+import API_BASE from "@/lib/api";
 
 const TOURNAMENTS = ["IPL", "T20I", "SA20"];
 const PHASES = [

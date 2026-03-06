@@ -1,9 +1,9 @@
 "use client";
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
 import PlayerCombobox from "@/components/PlayerCombobox";
 
-const API = "http://localhost:8000/api";
+import API_BASE from "@/lib/api";
 
 export default function PlayersIndexPage() {
   const router = useRouter();
@@ -12,7 +12,7 @@ export default function PlayersIndexPage() {
   const [selected, setSelected] = useState("");
 
   useEffect(() => {
-    fetch(`${API}/players`)
+    fetch(`${API_BASE}/players`)
       .then(r => r.json())
       .then(data => { setPlayers(data); setLoading(false); })
       .catch(() => setLoading(false));

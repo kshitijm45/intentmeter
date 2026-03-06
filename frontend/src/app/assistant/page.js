@@ -1,6 +1,7 @@
 "use client";
 import { useState, useRef, useEffect } from "react";
 import AssistantMessage from "@/components/AssistantMessage";
+import API_BASE from "@/lib/api";
 
 const suggestions = [
   "Virat Kohli batting average vs off spinners in T20Is?",
@@ -38,7 +39,7 @@ export default function AssistantPage() {
     setLoading(true);
 
     try {
-      const res  = await fetch("http://localhost:8000/api/assistant", {
+      const res  = await fetch(`${API_BASE}/assistant`, {
         method:  "POST",
         headers: { "Content-Type": "application/json" },
         body:    JSON.stringify({ question: query }),

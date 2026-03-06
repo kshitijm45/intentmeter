@@ -6,7 +6,7 @@ import StatCard from "@/components/StatCard";
 import SeasonBarChart from "@/components/SeasonBarChart";
 import PlayerCombobox from "@/components/PlayerCombobox";
 
-const API = "http://localhost:8000/api";
+import API_BASE from "@/lib/api";
 const ACCENT = "#ea580c";
 const BLUE   = "#3b82f6";
 
@@ -212,7 +212,7 @@ export default function PlayerProfilePage({ params }) {
 
   // Fetch player list for the switcher
   useEffect(() => {
-    fetch(`${API}/players`)
+    fetch(`${API_BASE}/players`)
       .then(r => r.json())
       .then(d => { setPlayers(d); setLoadingPlayers(false); })
       .catch(() => setLoadingPlayers(false));
@@ -229,7 +229,7 @@ export default function PlayerProfilePage({ params }) {
     setLoading(true);
     setError(null);
     const qs  = evts.length ? evts.map(e => `events=${e}`).join("&") : "";
-    const url = `${API}/profile?player=${encodeURIComponent(name)}${qs ? "&" + qs : ""}`;
+    const url = `${API_BASE}/profile?player=${encodeURIComponent(name)}${qs ? "&" + qs : ""}`;
     fetch(url)
       .then(r => { if (!r.ok) throw new Error(`HTTP ${r.status}`); return r.json(); })
       .then(json => { setData(json); setLoading(false); })

@@ -1,6 +1,7 @@
+import os
 import sqlite3
 
-DB_PATH = "./cricket_assistant.db"
+DB_PATH = os.environ.get("DATABASE_URL", "./cricket_assistant.db")
 
 def get_db():
     conn = sqlite3.connect(DB_PATH)
