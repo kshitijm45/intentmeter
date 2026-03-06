@@ -12,7 +12,7 @@ const features = [
       </svg>
     ),
     title: "Player Profiles",
-    description: "Career stats for 17,000+ T20 players. Batting and bowling breakdowns, season-by-season charts, and playing style context.",
+    description: "Career stats for 17,000+ T20 players. Batting and bowling numbers broken down by phase, season, and competition.",
     href: "/players/virat-kohli",
   },
   {
@@ -22,7 +22,7 @@ const features = [
       </svg>
     ),
     title: "Player Comparison",
-    description: "Side-by-side analysis of any two players. Radar charts across six key metrics, phase breakdowns, and a head-to-head stat table.",
+    description: "Put any two players side by side. Radar charts, phase breakdowns, and a full stat table — pick your winner.",
     href: "/compare",
   },
   {
@@ -32,7 +32,7 @@ const features = [
       </svg>
     ),
     title: "Matchup Analysis",
-    description: "Ball-by-ball batter vs bowler records. Dismissal rates, scoring patterns, and shot distribution across every delivery faced.",
+    description: "Every ball a batter has faced a bowler, all in one place. See exactly how the contest has played out.",
     href: "/matchup",
   },
   {
@@ -42,7 +42,7 @@ const features = [
       </svg>
     ),
     title: "Stats Explorer",
-    description: "Multi-dimensional filtering by competition, phase, bowling style, venue, and opposition. Surface the exact insight you're hunting for.",
+    description: "Filter by competition, phase, bowling type, venue, and more. Good for when you have a specific question and want the raw numbers.",
     href: "/explorer",
   },
 ];
@@ -52,13 +52,13 @@ const exampleQueries = [
     question: "Jasprit Bumrah's economy in IPL powerplay overs",
     category: "Bowling",
     categoryColor: "#3b82f6",
-    href: "/matchup",
+    href: "/assistant",
   },
   {
     question: "Virat Kohli's strike rate vs leg spin in middle overs",
     category: "Batting",
     categoryColor: "#ea580c",
-    href: "/compare",
+    href: "/assistant",
   },
   {
     question: "Rohit Sharma vs Kagiso Rabada — head-to-head IPL record",
@@ -70,13 +70,13 @@ const exampleQueries = [
     question: "Tim David's boundary % in IPL death overs",
     category: "Batting",
     categoryColor: "#ea580c",
-    href: "/compare",
+    href: "/assistant",
   },
   {
     question: "Rashid Khan's dot ball percentage in SA20",
     category: "Bowling",
     categoryColor: "#3b82f6",
-    href: "/compare",
+    href: "/assistant",
   },
   {
     question: "Suryakumar Yadav vs left-arm pace bowling",
@@ -117,7 +117,7 @@ export default function HomePage() {
             style={{ background: "var(--accent-bg)", borderColor: "var(--accent-border)", color: "var(--accent)" }}
           >
             <span className="w-1.5 h-1.5 rounded-full bg-orange-600 animate-pulse" />
-            T20 Cricket Analytics · IPL, SA20 &amp; T20I · 2017–2024
+            T20 Cricket Analytics · IPL, SA20 &amp; T20I · 2008–Present
           </div>
 
           <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold leading-tight mb-6" style={{ color: "var(--txt)" }}>
@@ -128,7 +128,7 @@ export default function HomePage() {
           </h1>
 
           <p className="text-lg sm:text-xl max-w-2xl mx-auto mb-10 leading-relaxed" style={{ color: "var(--txt-2)" }}>
-            Ball-by-ball T20 data across IPL, SA20, and international cricket. Matchup records, phase breakdowns, radar comparisons, and an AI assistant that speaks SQL.
+            Every ball from IPL, SA20, and T20 internationals — searchable, comparable, and queryable. Built for people who actually watch the game.
           </p>
 
           <form onSubmit={handleSearch} className="max-w-xl mx-auto mb-4">
@@ -184,7 +184,7 @@ export default function HomePage() {
               { value: "17,000+", label: "Players Tracked" },
               { value: "3",       label: "Competitions" },
               { value: "1M+",     label: "Balls Analysed" },
-              { value: "8",       label: "Seasons of Data" },
+              { value: "2008–Now", label: "Data Coverage" },
             ].map((s) => (
               <div key={s.label}>
                 <div className="text-2xl sm:text-3xl font-bold" style={{ color: "var(--txt)" }}>{s.value}</div>
@@ -199,10 +199,10 @@ export default function HomePage() {
       <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
         <div className="text-center mb-12">
           <h2 className="text-2xl sm:text-3xl font-bold mb-3" style={{ color: "var(--txt)" }}>
-            Answer the questions that matter
+            The stats you actually want to know
           </h2>
           <p className="text-base max-w-xl mx-auto" style={{ color: "var(--txt-3)" }}>
-            Phase-specific stats, bowler-type splits, venue records, head-to-heads — if it happened on a T20 pitch, you can ask it here.
+            How does Bumrah bowl in the powerplay? Who does Kohli struggle against? What's Rashid's economy in the death? Stop guessing.
           </p>
         </div>
 
@@ -269,10 +269,10 @@ export default function HomePage() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
           <div className="text-center mb-12">
             <h2 className="text-2xl sm:text-3xl font-bold mb-3" style={{ color: "var(--txt)" }}>
-              Everything you need to analyse T20 cricket
+              Four ways to dig into the data
             </h2>
             <p className="text-base max-w-lg mx-auto" style={{ color: "var(--txt-3)" }}>
-              Four tools, one platform. From granular player data to AI-driven query results.
+              Pick a tool, pick a player, and go down the rabbit hole.
             </p>
           </div>
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
@@ -303,10 +303,10 @@ export default function HomePage() {
               </svg>
             </div>
             <h3 className="text-2xl sm:text-3xl font-bold mb-3" style={{ color: "var(--txt)" }}>
-              Ask anything about cricket
+              Just ask in plain English
             </h3>
             <p className="text-base max-w-md mx-auto mb-8" style={{ color: "var(--txt-3)" }}>
-              A fine-tuned LLM trained on 230+ cricket SQL examples converts your plain English question into a live database query and returns the results instantly.
+              Type a question, get a table. No filters to configure, no dropdowns to fight with — the AI figures out the query and runs it live against the database.
             </p>
             <a
               href="/assistant"

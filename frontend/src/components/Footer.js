@@ -8,16 +8,10 @@ export default function Footer() {
           {/* Brand */}
           <div>
             <div className="flex items-center gap-2 mb-3">
-              <div className="w-7 h-7 rounded-md bg-orange-600 flex items-center justify-center">
-                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="var(--accent-fg)" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
-                  <circle cx="12" cy="12" r="10" />
-                  <path d="M8 12l3 3 5-5" />
-                </svg>
-              </div>
-              <span className="text-[var(--txt)] font-bold text-lg">Intentmeter</span>
+              <img src="/logo.png" alt="Intentmeter" className="h-8 w-auto" />
             </div>
             <p className="text-[var(--txt-3)] text-sm leading-relaxed">
-              Professional cricket analytics. Decode intent, understand performance.
+              T20 cricket data for people who care about the details.
             </p>
           </div>
 

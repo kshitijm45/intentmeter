@@ -15,8 +15,8 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata = {
-  title: "Intentmeter – Cricket Analytics",
-  description: "Professional cricket analytics dashboard",
+  title: "Intentmeter – T20 Cricket Analytics",
+  description: "Ball-by-ball T20 analytics across IPL, SA20, and international cricket. Matchup records, phase breakdowns, radar comparisons, and an AI assistant.",
   icons: { icon: "/logo.png" },
 };
 
