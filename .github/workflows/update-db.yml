@@ -8,10 +8,48 @@ on:
 jobs:
   update:
     runs-on: ubuntu-latest
-    steps:
-      - uses: superfly/flyctl-actions/setup-flyctl@master
 
-      - name: Run DB update script on Fly.io
-        run: fly ssh console -a intentmeter-api -C "python /app/scripts/update_db.py"
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      # Cache the ETag file so conditional GETs work across runs
+      - name: Restore ETag cache
+        uses: actions/cache@v4
+        with:
+          path: backend/scripts/.etags.json
+          key: cricsheet-etags
+          restore-keys: cricsheet-etags
+
+      # Download the current DB from the GitHub Release so the
+      # update script only inserts genuinely new matches
+      - name: Download current DB from GitHub Release
         env:
-          FLY_API_TOKEN: ${{ secrets.FLY_API_TOKEN }}
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          gh release download db-latest \
+            --pattern "cricket_assistant.db" \
+            --dir backend \
+            --clobber
+
+      - name: Install Python dependencies
+        run: pip install fastapi uvicorn --quiet
+
+      - name: Run DB update script
+        run: |
+          cd backend
+          DATABASE_URL=./cricket_assistant.db python scripts/update_db.py
+
+      # Replace the DB asset on the release with the updated file
+      - name: Upload updated DB to GitHub Release
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          gh release upload db-latest backend/cricket_assistant.db --clobber
+
+      # Tell Render to redeploy so start.sh downloads the new DB
+      - name: Trigger Render redeploy
+        run: curl -fsSX POST "${{ secrets.RENDER_DEPLOY_HOOK }}"
