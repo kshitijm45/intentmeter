@@ -2,7 +2,7 @@ import os
 
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
-from routes import matchup, players, compare, stats, assistant, profile
+from routes import matchup, players, compare, stats, assistant, profile, query
 
 app = FastAPI()
 
@@ -28,3 +28,4 @@ app.include_router(compare.router, prefix="/api")
 app.include_router(stats.router, prefix="/api")
 app.include_router(assistant.router, prefix="/api")
 app.include_router(profile.router, prefix="/api")
+app.include_router(query.router, prefix="/api")
